@@ -24,11 +24,11 @@ if [ ! -d .git ]; then
     exit 1
 fi
 
-# check if the current directory is a submodule
-if [ ! -f .gitmodules ]; then
-    echo "Error: cannot run smod in a submodule"
-    exit 1
-fi
+# check if the current directory contains submodules
+# if [ ! -f .gitmodules ]; then
+#     echo "Error: not a git repository with submodules"
+#     exit 1
+# fi
 
 # check if the current directory is the root of the git repository
 if [ ! -f .git/config ]; then
@@ -53,6 +53,10 @@ function add() {
         # print the submodule status
         git submodule status
     fi
+}
+
+function status() {
+    git submodule status
 }
 
 # update all submodules
@@ -102,6 +106,9 @@ case $1 in
         ;;
     remove)
         remove $2
+        ;;
+    status)
+        status
         ;;
     help)
         help
